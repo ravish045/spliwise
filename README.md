@@ -1,12 +1,77 @@
-# React + Vite
+SplitWise - React Budget Splitter App 💸
+A responsive web application built with React and Tailwind CSS that allows a group of friends to track shared expenses, split bills fairly, and visualize their balances. The app features a clean, modern UI with a dark mode toggle, and all data is persisted in the browser's localStorage.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Live Demo Link
+(https://splitwiseappp.netlify.app/)
 
-Currently, two official plugins are available:
+✨ Features
+🧑‍🤝‍🧑 Friend Management: Easily add and remove friends from your group.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🧾 Expense Tracking: Add expenses with a description, amount, payer, and select which friends participated in the split.
 
-## Expanding the ESLint configuration
+🤖 Automatic Debt Simplification: The core logic calculates not just who owes money, but simplifies it to the minimum number of transactions. (e.g., If A owes B ₹10 and B owes A ₹5, the app simply shows A owes B ₹5).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+📊 Interactive Dashboard:
+
+A Pie Chart visualizes the total amount paid by each person.
+
+A Summary Table shows the final balance for each friend (who owes and who is owed).
+
+💾 Persistent Data: All friends and expenses are saved to the browser's localStorage, so your data is available across sessions.
+
+🎨 Dark/Light Mode: A sleek theme toggle for user comfort.
+
+📱 Fully Responsive: A mobile-first design that works beautifully on all screen sizes.
+
+🎬 Smooth Animations: Subtle animations using Framer Motion provide a fluid user experience when adding or removing items.
+
+🗑️ Safe Deletion: Friends involved in existing expenses cannot be removed, preventing data corruption.
+
+🛠️ Technology Stack
+Framework: React (bootstrapped with Vite)
+
+Styling: Tailwind CSS
+
+Data Visualization: Chart.js with react-chartjs-2
+
+Animation: Framer Motion
+
+Icons: Lucide React
+
+Data Persistence: Browser localStorage API
+
+⚙️ Getting Started
+To run this project locally on your machine, follow these steps:
+
+Prerequisites
+Node.js (v18.x or later recommended)
+
+npm (usually comes with Node.js)
+
+Installation & Setup
+Clone the repository:
+
+git clone(https://github.com/ravish045/spliwise)
+
+Navigate to the project directory:
+
+cd your-repo-name
+
+Install the dependencies:
+
+npm install
+
+Run the development server:
+
+npm run dev
+
+Open your browser and visit http://localhost:5173 to see the application running.
+
+🚀 Deployment
+This project is configured for easy deployment on static hosting platforms like Netlify or Vercel.
+
+Build Command: npm run build
+
+Publish Directory: dist
+
+Simply link your GitHub repository to one of these services, and it will handle the build and deployment process automatically.
