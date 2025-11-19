@@ -4,13 +4,13 @@ import { calculateBalances } from './utils/calculateBalances';
 
 import Header from './components/Header';
 import AddFriendForm from './components/AddFriendForm';
+import FriendList from './components/FriendList';
 import AddExpenseForm from './components/AddExpenseForm';
 import ExpenseList from './components/ExpenseList';
 import BalanceSummary from './components/BalanceSummary';
 import Dashboard from './components/Dashboard';
 
 function App() {
-  // Change #2: Removed pre-defined names. Starts with an empty array.
   const [friends, setFriends] = useLocalStorage('friends', []);
   const [expenses, setExpenses] = useLocalStorage('expenses', []);
 
@@ -20,6 +20,19 @@ function App() {
     } else {
       alert("This friend already exists!");
     }
+  };
+
+  const handleRemoveFriend = (nameToRemove) => {
+    const isFriendInvolved = expenses.some(
+      expense => expense.payer === nameToRemove || expense.participants.includes(nameToRemove)
+    );
+
+    if (isFriendInvolved) {
+      alert(`${nameToRemove} cannot be removed because they are part of an existing expense. Please remove the relevant expenses first.`);
+      return;
+    }
+    
+    setFriends(prev => prev.filter(friend => friend !== nameToRemove));
   };
 
   const handleAddExpense = (expense) => {
@@ -33,9 +46,10 @@ function App() {
   const { balances, transactions } = useMemo(() => calculateBalances(expenses, friends), [expenses, friends]);
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="container mx-auto p-4">
+      
+      <main className="container mx-auto p-4 flex-grow">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Left Column */}
@@ -43,6 +57,7 @@ function App() {
             <div>
               <h2 className="text-xl font-bold mb-4">Friends</h2>
               <AddFriendForm onAddFriend={handleAddFriend} />
+              <FriendList friends={friends} onRemoveFriend={handleRemoveFriend} />
             </div>
             <AddExpenseForm friends={friends} onAddExpense={handleAddExpense} />
             <BalanceSummary transactions={transactions} />
@@ -55,7 +70,12 @@ function App() {
           </div>
         </div>
       </main>
-    </>
+
+      {/* Footer Section */}
+      <footer className="py-6 text-center text-sm text-slate-500 dark:text-slate-400 border-t dark:border-slate-800 mt-8 bg-white dark:bg-slate-900">
+        <p>&copy; {new Date().getFullYear()} Ravish. All rights reserved.</p>
+      </footer>
+    </div>
   );
 }
 
